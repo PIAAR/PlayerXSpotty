@@ -34,6 +34,16 @@ class SpotifyPodcastFetcher:
                 podcast_id = credentials.get("spotify", {}).get("podcast_id")
                 episode_ids = credentials.get("spotify", {}).get("episode_ids", [])
                 device_id = credentials.get("spotify", {}).get("device_id")
+
+                # Fetch device_id if missing
+                if not device_id:
+                    print("Device ID missing, fetching it...")
+                    device_id = self.fetch_device_id()
+                    # Update the credentials file with the fetched device_id
+                    credentials["spotify"]["device_id"] = device_id
+                    with open(self.credentials_file, 'w') as outfile:
+                        json.dump(credentials, outfile, indent=4)
+
                 if client_id and client_secret and podcast_id and episode_ids and device_id:
                     return client_id, client_secret, podcast_id, episode_ids, device_id
                 else:
@@ -108,17 +118,24 @@ class SpotifyPodcastFetcher:
         with open(self.credentials_file, 'w') as file:
             json.dump(credentials, file, indent=4)
 
-    def is_enabled(self):
+    def fetch_device_id(self):
         """
-        Check if the playback system is enabled in the credentials file.
+        Fetch the active device ID using the Spotify Web API.
         """
-        try:
-            with open(self.credentials_file, 'r') as file:
-                credentials = json.load(file)
-                return credentials.get("spotify", {}).get("enabled", False)
-        except (FileNotFoundError, json.JSONDecodeError):
-            print("Error: Could not read the credentials file.")
-            return False
+        url = f"{self.base_url}/me/player/devices"
+        response = requests.get(url, headers=self.headers)
+
+        if response.status_code == 200:
+            devices = response.json().get("devices", [])
+            if devices:
+                # Automatically select the first available device
+                device_id = devices[0].get("id")
+                print(f"Device ID found: {device_id}")
+                return device_id
+            else:
+                raise ValueError("No active devices found. Start Librespot or another Spotify device.")
+        else:
+            raise Exception(f"Failed to fetch devices: {response.status_code}, {response.json()}")
 
     def start_librespot(self):
         """

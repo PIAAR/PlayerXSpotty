@@ -1,0 +1,22 @@
+{
+    "spotify": {
+        "app_access_token": "BQAu8IYbHUXt412_0TvyAitie0QJBINPAKJrevmMQwnSRFaYUww5nlzTwyLJ61D8hEGu9IKdZ-v1i_qjmAst6j6fPdz0kKQh8sHCkfYqC6GAQ6f4z3s",
+        "access_token":"BQAkm3QWsoMcH2-ditkUMVJozXl18pNfPcUGDtc0RREV0-qwwBWj1AHLm2_JJRtehD6cAxeZsfEbYi_8t5ZVAt64A1nmmEAd6wixDi8qmKBd_pj-DbShR2FeQjBxZcIlXg6M6B_yKgaXs8bKcQ6GgZHiqILU3zo7IyMTTlmGpx9soJv1of15N2jnNqGoWQLnZ9JucG9z7da88BjdLFRULQDhjGz4ci-9sYPsQ0wC2my5c_dqihqTIhKRKMh6drYL_Yf3eay78RWg26rao9gFXjrJkqoTP83gOAHI325Bz6YL8RxfKS-cKlODqD0xYbOExXJBrzZwcxY9uXry0ieo5IDHauv3HR16Zoc",
+        "client_id": "176aa0c150664c6682c7e061b3cea1fa",
+        "client_secret": "8399f55616434d1c866bea79a4e19afb",
+        "device_id": "",
+        "app_name": "Playback Showman",
+        "podcast_id": "1mKMN1449nhzBLgr4KLXch",
+        "episode_ids": [
+            "0orgzlv8n7djAQ4z5NxJmm",
+            "4K4wEM2HHEJjivcxl0VFKl",
+            "2m5jzCEhHCwwxZcjkCuD88",
+            "2m5jzCEhHCwwxZcjkCuD88",
+            "3UXC6VfDHXbCreqFGmlSKE",
+            "3ZWPtfsMONImW7HD6IM2qC",
+            "eWiAaEGLKH4EJpPRbApAv",
+            "5PoNtIOGap6oIrBoOtZpIA"
+        ],
+        "enabled": true
+    }
+}
