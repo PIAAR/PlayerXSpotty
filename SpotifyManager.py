@@ -2,6 +2,7 @@ import requests
 import json
 import asyncio
 import random
+import subprocess
 
 class SpotifyPodcastFetcher:
     def __init__(self, credentials_file="credentials.json"):
@@ -119,6 +120,23 @@ class SpotifyPodcastFetcher:
             print("Error: Could not read the credentials file.")
             return False
 
+    def start_librespot(self):
+        """
+        Start the Librespot process using the pipe backend.
+        """
+        command = [
+            "./target/release/librespot",
+            "--name", "AutomationMgrDevice",
+            "--token", self.access_token,
+            "--backend", "pipe",
+            "--device", "/dev/null"
+        ]
+        try:
+            process = subprocess.Popen(command)
+            print("Librespot process started with PID:", process.pid)
+        except FileNotFoundError:
+            print("Error: Librespot binary not found.")
+
     async def play_episode(self, episode_id, semaphore):
         """
         Play a specific Spotify episode by ID.
@@ -172,6 +190,9 @@ if __name__ == "__main__":
 
     # Print configured episode IDs
     showman.print_episode_list()
+
+    # Start Librespot process
+    showman.start_librespot()
 
     # Play episodes asynchronously in random order
     try:
